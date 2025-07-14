@@ -1,0 +1,941 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Verificentro V-NAR-01</title>
+  <link rel="icon" href="Logo-Verificación.ico" type="image/x-icon">
+  <style>
+    body {
+      margin: 0;
+      padding-top: 150px;
+      font-family: 'Segoe UI', sans-serif;
+      background-color: #f3f3f3;
+      color: #ffffff;
+      line-height: 1.5;
+    }
+    header {
+      position: fixed;
+      top: 0;
+      width: 100%;
+      z-index: 1000;
+      background-color: #77052b;
+      color: white;
+      padding: 1rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+    }
+    .logo-container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      margin-bottom: 0.5rem;
+    }
+    .logo-container img {
+      height: 60px;
+      width: auto;
+      margin-bottom: 0.5rem;
+    }
+    header h1 {
+      margin: 0;
+      font-size: 1.5rem;
+      text-align: center;
+    }
+    nav {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 0.5rem;
+      margin-top: 0.5rem;
+      width: 100%;
+    }
+    nav a {
+      text-decoration: none;
+      color: rgb(255, 255, 255);
+      font-weight: bold;
+      padding: 0.5rem 0.8rem;
+      border-radius: 4px;
+      transition: all 0.3s ease;
+      font-size: 0.9rem;
+      margin: 0 5px;
+    }
+    nav a:hover, nav a.active {
+      background-color: #8f0e39;
+    }
+    .consulta-btn {
+      background-color: #c71c55;
+      color: white;
+      font-weight: bold;
+      animation: pulse 2s infinite;
+    }
+    .consulta-btn:hover {
+      background-color: #8f0e39;
+    }
+    @keyframes pulse {
+      0% { transform: scale(1); }
+      50% { transform: scale(1.05); }
+      100% { transform: scale(1); }
+    }
+    section {
+      padding: 1.5rem;
+      min-height: calc(100vh - 70px);
+      display: none;
+    }
+    #inicio {
+      display: block;
+    }
+    .section-title {
+      font-size: 1.5rem;
+      margin-bottom: 1rem;
+      color: #000000;
+      border-bottom: 2px solid #000000;
+      padding-bottom: 0.5rem;
+    }
+    .placa-form-container {
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+    }
+    .placa-form {
+      background-color: #8f0e39;
+      padding: 1rem;
+      border-radius: 8px;
+      width: 100%;
+    }
+    input[type="text"] {
+      padding: 0.5rem;
+      width: 100%;
+      margin-bottom: 1rem;
+      border: 1px solid #000000;
+      border-radius: 4px;
+      font-size: 1rem;
+      background-color: #ffffff;
+      color: #030303;
+      transition: all 0.3s ease;
+    }
+    input[type="text"]:focus {
+      outline: none;
+      border-color: #8f0e39;
+      box-shadow: 0 0 0 2px rgba(90, 95, 92, 0.2);
+    }
+    button {
+      background-color: #5f0623;
+      color: rgb(255, 255, 255);
+      padding: 0.7rem 1.3rem;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      transition: background-color 0.3s;
+      font-size: 1rem;
+      width: 100%;
+    }
+    button:hover {
+      background-color: #610524;
+    }
+    footer {
+      background-color: #77052b;
+      color: rgb(255, 255, 255);
+      text-align: center;
+      padding: 1rem;
+      margin-top: 2rem;
+      font-size: 0.9rem;
+    }
+    .bg-image-section {
+      background-image: url('verificentro.jpeg');
+      background-size: cover;
+      background-position: center;
+      position: relative;
+    }
+    .bg-image-section::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background-color: rgba(0, 0, 0, 0.3);
+      z-index: 0;
+    }
+    .bg-image-content {
+      position: relative;
+      z-index: 1;
+    }
+    .welcome-message {
+      background-color: rgba(119, 5, 43, 0.664);
+      color: white;
+      padding: 1.5rem;
+      border-radius: 8px;
+      margin-bottom: 1.5rem;
+      backdrop-filter: blur(5px);
+    }
+    .welcome-title {
+      font-size: 1.8rem;
+      text-align: center;
+      margin-bottom: 1rem;
+    }
+    .commitment-section {
+      background-color: rgba(119, 5, 43, 0);
+      padding: 1.2rem;
+      border-radius: 8px;
+      margin-top: 1.2rem;
+      backdrop-filter: blur(5px);
+    }
+    .commitment-title {
+      font-size: 1.3rem;
+      margin-bottom: 0.8rem;
+      text-align: center;
+    }
+    .commitment-subtitle {
+      font-weight: bold;
+      font-size: 1.1rem;
+      margin: 0.8rem 0;
+      text-align: center;
+    }
+    .commitment-item {
+      display: flex;
+      align-items: flex-start;
+      margin: 0.8rem 0;
+    }
+    .commitment-icon {
+      font-size: 1.3rem;
+      margin-right: 0.8rem;
+      margin-top: 0.2rem;
+    }
+    .commitment-quote {
+      font-style: italic;
+      padding: 0.8rem;
+      background-color: rgba(233, 14, 87, 0.233);
+      border-radius: 8px;
+      margin: 1.2rem 0;
+      text-align: center;
+      border-left: 4px solid rgba(233, 14, 87, 0);;
+      backdrop-filter: blur(3px);
+      color: #fff;
+      font-weight: bold;
+    }
+    .product-card {
+      background-color: rgb(102, 4, 37);
+      border-radius: 8px;
+      padding: 1.2rem;
+      margin-bottom: 1.5rem;
+      box-shadow: 0 2px 4px rgba(255, 255, 255, 0.1);
+    }
+    .product-title {
+      color: #ffffff;
+      font-size: 1.2rem;
+      margin-bottom: 0.5rem;
+    }
+    .requisitos-container {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 1.2rem;
+      margin-top: 1.2rem;
+    }
+    .requisito-card {
+      background-color: white;
+      border-radius: 8px;
+      padding: 1.2rem;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+      margin-bottom: 1.2rem;
+    }
+    .requisito-card.particulares {
+      background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), 
+                  url('vehiculos particulares.jpeg');
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      color: #ffffff;
+    }
+    .requisito-card.particulares .requisito-title,
+    .requisito-card.particulares .requisito-list li,
+    .requisito-card.particulares .requisito-nota,
+    .requisito-card.particulares .requisito-pasos {
+      text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.8);
+      color: #ffffff;
+      font-weight: bold;
+    }
+    .requisito-card.pesados {
+      background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), 
+                  url('vehiculos pesados.jpg');
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      color: #ffffff;
+    }
+    .requisito-card.pesados .requisito-title,
+    .requisito-card.pesados .requisito-list li,
+    .requisito-card.pesados .requisito-nota,
+    .requisito-card.pesados .requisito-pasos {
+      text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.8);
+      color: #ffffff;
+      font-weight: bold;
+    }
+    .requisito-card.transporte {
+      background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), 
+                  url('transporte publico.jpg');
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      color: #ffffff;
+    }
+    .requisito-card.transporte .requisito-title,
+    .requisito-card.transporte .requisito-list li,
+    .requisito-card.transporte .requisito-nota,
+    .requisito-card.transporte .requisito-pasos {
+      text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.8);
+      color: #ffffff;
+      font-weight: bold;
+    }
+    .requisito-card.foraneos {
+      background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), 
+                  url('VEHICULOS FORANEOS.png');
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      color: #ffffff;
+    }
+    .requisito-card.foraneos .requisito-title,
+    .requisito-card.foraneos .requisito-list li,
+    .requisito-card.foraneos .requisito-nota,
+    .requisito-card.foraneos .requisito-pasos {
+      text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.8);
+      color: #ffffff;
+      font-weight: bold;
+    }
+    .requisito-title {
+      color: #000000;
+      font-size: 1.2rem;
+      margin-bottom: 0.8rem;
+      border-bottom: 2px solid #000000;
+      padding-bottom: 0.5rem;
+    }
+    .requisito-list {
+      padding-left: 1.2rem;
+    }
+    .requisito-list li {
+      margin-bottom: 0.6rem;
+    }
+    .requisito-nota {
+      background-color: #77052bce;
+      padding: 0.8rem;
+      border-left: 4px solid #77052bad;
+      margin-top: 0.8rem;
+      border-radius: 0 4px 4px 0;
+      font-size: 0.9rem;
+    }
+    .requisito-pasos {
+      background-color: #77052bad;
+      padding: 0.8rem;
+      border-radius: 8px;
+      margin-top: 1.2rem;
+      font-size: 0.9rem;
+    }
+    .requisito-pasos ol {
+      padding-left: 1.2rem;
+    }
+    .requisito-pasos li {
+      margin-bottom: 0.5rem;
+    }
+    .info-adicional {
+      font-style: italic;
+      color: #ffffff;
+      margin-top: 0.8rem;
+      padding: 0.5rem;
+      background-color: #77052bad;
+      border-left: 3px solid #77052b;
+      font-size: 0.9rem;
+    }
+    .recordatorio {
+      font-style: italic;
+      color: #ffffff;
+      margin-top: 0.8rem;
+      padding: 0.8rem;
+      background-color: #77052b93;
+      border-radius: 8px;
+      border-left: 4px solid #77052b86;
+      font-size: 0.9rem;
+    }
+    .calendario-img {
+      max-width: 100%;
+      height: auto;
+      border: 2px solid #000000;
+      border-radius: 8px;
+      margin-top: 1rem;
+    }
+    .precio-oficial {
+      font-weight: bold;
+      color: #ffffff;
+      font-size: 1.1rem;
+      margin: 1rem 0;
+      padding: 0.5rem;
+      background-color: #77052b;
+      border-left: 4px solid #631616;
+      border-radius: 4px;
+    }
+    .servicio-item {
+      margin-bottom: 1.2rem;
+      padding-bottom: 0.8rem;
+      border-bottom: 1px dashed #ffffff;
+    }
+    .servicio-item h4 {
+      color: #ffffff;
+      margin-bottom: 0.3rem;
+      font-size: 1.1rem;
+    }
+    .servicio-item p {
+      margin-left: 0.5rem;
+      font-size: 0.95rem;
+    }
+    .map-button-container {
+      display: flex;
+      justify-content: center;
+      margin-top: 1.5rem;
+      padding: 0.5rem 0;
+    }
+    .map-button {
+      display: inline-block;
+      background-color: #77052b;
+      color: rgb(255, 255, 255);
+      padding: 0.8rem 1.5rem;
+      border-radius: 4px;
+      text-decoration: none;
+      font-weight: bold;
+      transition: background-color 0.3s;
+      text-align: center;
+      width: auto;
+    }
+    .map-button:hover {
+      background-color: #77052bd2;
+    }
+    .robot-container {
+      width: 100%;
+      height: 300px;
+      margin: 1rem 0;
+      border-radius: 8px;
+      overflow: hidden;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+      position: relative;
+    }
+    .robot-container iframe {
+      width: 100%;
+      height: 100%;
+      border: none;
+    }
+    .street-view-container {
+      margin-top: 1.5rem;
+      border-radius: 8px;
+      overflow: hidden;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    }
+    
+    @media (min-width: 768px) {
+      body {
+        padding-top: 180px;
+      }
+      header {
+        flex-direction: column;
+        padding: 1rem;
+      }
+      .logo-container img {
+        height: 80px;
+      }
+      header h1 {
+        font-size: 1.8rem;
+        text-align: center;
+      }
+      nav {
+        margin-top: 0.5rem;
+        gap: 1rem;
+        width: 100%;
+        justify-content: center;
+      }
+      nav a {
+        font-size: 1rem;
+        margin: 0 5px;
+      }
+      section {
+        padding: 2rem;
+      }
+      .placa-form-container {
+        flex-direction: row;
+        align-items: flex-start;
+      }
+      .placa-form {
+        max-width: 400px;
+      }
+      button {
+        width: auto;
+      }
+      .requisitos-container {
+        grid-template-columns: repeat(2, 1fr);
+      }
+      .welcome-title {
+        font-size: 2rem;
+      }
+      .bg-image-section {
+        background-attachment: fixed;
+      }
+      .robot-container {
+        height: 400px;
+      }
+    }
+    
+    @media (min-width: 992px) {
+      .requisitos-container {
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      }
+      nav {
+        justify-content: center;
+      }
+      .robot-container {
+        height: 500px;
+      }
+    }
+    .fachada-img {
+  width: 80%; /* Reducimos el ancho al 80% del contenedor */
+  max-width: 600px; /* Ancho máximo */
+  height: auto; /* Mantiene la proporción */
+  display: block; /* Para centrar con margen automático */
+  margin: 1rem auto; /* Centrado vertical y horizontal */
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  border: 2px solid #77052b;
+}
+
+@media (max-width: 768px) {
+  .fachada-img {
+    width: 95%; /* En móvil ocupa casi todo el ancho */
+    max-width: 100%; /* Permite que se ajuste al contenedor */
+  }
+}
+  </style>
+</head>
+<body>
+  <header>
+    <div class="logo-container">
+      <img src="Logo Verificación.png" alt="Logo Verificentro V-NAR-01">
+      <h1>Verificentro V-NAR-01</h1>
+    </div>
+    <nav>
+      <a href="#inicio" class="active">Inicio</a>
+      <a href="#servicios">Servicios</a>
+      <a href="#requisitos">Requisitos</a>
+      <a href="#horarios">Horarios</a>
+      <a href="#ubicacion">Ubicación y contacto</a>
+      <a href="#verificacion" class="consulta-btn">📅 Consulta tu Fecha de Verificación</a>
+    </nav>
+  </header>
+
+  <section id="inicio" class="bg-image-section">
+    <div class="bg-image-content">
+      <div class="robot-container">
+        <iframe src='https://my.spline.design/genkubgreetingrobot-Tzst4C2MGxwQO1KPSQVsaCDw/' frameborder='0'></iframe>
+      </div>
+      
+      <div class="welcome-message">
+        <h2 class="welcome-title">¡Bienvenido al Verificentro V-NAR-01!</h2>
+        <p>Somos tu mejor opción para la verificación vehicular en el estado. Ofrecemos servicio rápido, confiable y con los más altos estándares de calidad.</p>
+        
+        <div class="commitment-section">
+          <h3 class="commitment-title">🌱 NUESTRO COMPROMISO</h3>
+          <p class="commitment-subtitle">✅ Tu auto en regla, el medio ambiente en paz.</p>
+          
+          <p>En Verificentro V-NAR-01, no solo nos aseguramos de que tu vehículo cumpla con las normativas, sino que también protegemos el aire que todos respiramos. Cada verificación es un paso hacia:</p>
+          
+          <div class="commitment-item">
+            <span class="commitment-icon">🚗</span>
+            <div>
+              <strong>Movilidad responsable:</strong> Garantizamos que tu auto funcione de manera eficiente y segura.
+            </div>
+          </div>
+          
+          <div class="commitment-item">
+            <span class="commitment-icon">🌍</span>
+            <div>
+              <strong>Menos emisiones:</strong> Reducimos juntos la huella ambiental del parque vehicular.
+            </div>
+          </div>
+          
+          <div class="commitment-item">
+            <span class="commitment-icon">⚡️</span>
+            <div>
+              <strong>Procesos transparentes:</strong> Sin trampas, sin esperas. Cumplimos con ética y rapidez.
+            </div>
+          </div>
+          
+          <p class="commitment-quote">"Porque un auto en regla no solo evita multas… ¡Cuida tu planeta y tu salud!"</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="verificacion">
+    <h2 class="section-title">Consulta tu Fecha de Verificación</h2>
+    <div class="placa-form-container">
+      <div class="placa-form">
+        <label for="placa">Ingresa tu número de placa:</label>
+        <input type="text" id="placa" placeholder="Ej: YZX1234">
+        <button onclick="consultarFecha()">Consultar Fecha</button>
+        <p id="resultado" style="margin-top: 1rem; font-weight: bold; min-height: 100px; background-color: #f8f9fa; padding: 1rem; border-radius: 4px;"></p>
+        <div class="info-adicional" style="margin-top: 1rem;">
+          <p><strong>Nota:</strong> Para poder revisar su próximo periodo de verificación, deberá colocar el número de placa de su vehículo (tal como aparece en su tarjeta de circulación).</p>
+        </div>
+      </div>
+      
+      <div class="calendario-container">
+        <img src="calendario-oficial.png" alt="Calendario Oficial de Verificación Vehicular" class="calendario-img">
+      </div>
+    </div>
+  </section>
+
+  <section id="servicios">
+    <h2 class="section-title">Nuestros Servicios</h2>
+    <div class="product-card">
+      <h3 class="product-title">Servicios de Verificación Vehicular</h3>
+      <p>Contamos con los siguientes servicios de verificación para todo tipo de vehículos:</p>
+      
+      <div class="servicio-item">
+        <h4>1. Verificación para Autos Particulares</h4>
+        <p>Servicio de verificación obligatoria para vehículos particulares según las normas oficiales.</p>
+      </div>
+      
+      <div class="servicio-item">
+        <h4>2. Verificación para Transporte Público</h4>
+        <p>Verificación especial para unidades de transporte público conforme a los lineamientos.</p>
+      </div>
+      
+      <div class="servicio-item">
+        <h4>3. Verificación para Vehículos Pesados</h4>
+        <p>Servicio especializado para camiones y vehículos de carga.</p>
+      </div>
+      
+      <div class="servicio-item">
+        <h4>4. Verificación para Automóviles Diésel</h4>
+        <p>Verificación con estándares específicos para motores diésel.</p>
+      </div>
+      
+      <div class="servicio-item">
+        <h4>5. Verificación Voluntaria para Vehículos Foráneos</h4>
+        <p>Servicio para vehículos con placas de otros estados que requieran verificación.</p>
+      </div>
+      
+      <div class="precio-oficial">Precio Oficial de Referencia: $476.00</div>
+      <div class="info-adicional">
+        <p><strong>Nota:</strong> El precio final lo determina el sistema de la Oficina Virtual de Hacienda (OVH) del Estado de Veracruz y se especifica en el recibo de pago referenciado que se genera al momento del trámite.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="requisitos">
+    <h2 class="section-title">Requisitos para Verificación</h2>
+    <div class="requisitos-container">
+      <div class="requisito-card particulares">
+        <h3 class="requisito-title">Vehículos Particulares</h3>
+        <p>Para realizar el trámite de verificación vehicular, deberá presentar los siguientes documentos:</p>
+        <ul class="requisito-list">
+          <li><strong>Tarjeta de circulación original</strong> vigente del vehículo</li>
+          <li><strong>Papeleta de verificación anterior</strong> (comprobante de la última verificación realizada)</li>
+        </ul>
+        
+        <div class="requisito-nota">
+          <p><strong>Nota importante:</strong> En caso de no contar con la papeleta anterior, deberá manifestar esta situación al personal del verificentro al momento de realizar su trámite.</p>
+        </div>
+        
+        <div class="requisito-pasos">
+          <h4>Procedimiento a seguir:</h4>
+          <ol>
+            <li>Presentar los documentos requeridos en el área de recepción</li>
+            <li>Recibir la hoja de pago referenciado para su verificación</li>
+            <li>Realizar el pago correspondiente en la institución bancaria indicada</li>
+            <li>Regresar al verificentro con el comprobante de pago</li>
+            <li>Seguir las instrucciones que le indique nuestro personal calificado</li>
+          </ol>
+        </div>
+      </div>
+      
+      <div class="requisito-card pesados">
+        <h3 class="requisito-title">Vehículos Pesados y Automóviles Diésel</h3>
+        <p>Para realizar el trámite de verificación vehicular, deberá presentar los siguientes documentos:</p>
+        <ul class="requisito-list">
+          <li><strong>Tarjeta de circulación original</strong> vigente del vehículo</li>
+          <li><strong>Papeleta de verificación anterior</strong> (comprobante de la última verificación realizada)</li>
+        </ul>
+        
+        <div class="requisito-nota">
+          <p><strong>Nota importante:</strong> En caso de no contar con la papeleta anterior, deberá manifestar esta situación al personal del verificentro al momento de realizar su trámite.</p>
+        </div>
+        
+        <div class="requisito-pasos">
+          <h4>Procedimiento a seguir:</h4>
+          <ol>
+            <li>Presentar los documentos requeridos en el área de recepción</li>
+            <li>Recibir la hoja de pago referenciado para su verificación</li>
+            <li>Realizar el pago correspondiente en la institución bancaria indicada</li>
+            <li>Regresar al verificentro con el comprobante de pago</li>
+            <li>Seguir las instrucciones que le indique nuestro personal calificado</li>
+          </ol>
+        </div>
+      </div>
+      
+      <div class="requisito-card transporte">
+        <h3 class="requisito-title">Transporte Público</h3>
+        <p>Para realizar el trámite de verificación vehicular, deberá presentar los siguientes documentos:</p>
+        <ul class="requisito-list">
+          <li><strong>Tarjeta de circulación original</strong> vigente del vehículo</li>
+          <li><strong>Papeleta de verificación anterior</strong> (comprobante de la última verificación realizada)</li>
+        </ul>
+        
+        <div class="requisito-nota">
+          <p><strong>Nota importante:</strong> En caso de no contar con la papeleta anterior, deberá manifestar esta situación al personal del verificentro al momento de realizar su trámite.</p>
+        </div>
+        
+        <div class="requisito-pasos">
+          <h4>Procedimiento a seguir:</h4>
+          <ol>
+            <li>Presentar los documentos requeridos en el área de recepción</li>
+            <li>Recibir la hoja de pago referenciado para su verificación</li>
+            <li>Realizar el pago correspondiente en la institución bancaria indicada</li>
+            <li>Regresar al verificentro con el comprobante de pago</li>
+            <li>Seguir las instrucciones que le indique nuestro personal calificado</li>
+          </ol>
+        </div>
+        
+        <div class="info-adicional">
+          <p>Para más información sobre la verificación de vehículos de transporte público que se encuentren en proceso de emplacamiento, favor de acudir al verificentro.</p>
+        </div>
+      </div>
+      
+      <div class="requisito-card foraneos">
+        <h3 class="requisito-title">Vehículos Foráneos (Voluntaria)</h3>
+        <p>Para realizar el trámite de verificación vehicular, deberá presentar los siguientes documentos:</p>
+        <ul class="requisito-list">
+          <li><strong>Tarjeta de circulación original</strong> vigente del vehículo</li>
+          <li><strong>Papeleta de verificación anterior</strong> (si cuenta con ella)</li>
+        </ul>
+        
+        <div class="requisito-pasos">
+          <h4>Procedimiento a seguir:</h4>
+          <ol>
+            <li>Presentar los documentos requeridos en el área de recepción</li>
+            <li>Recibir la hoja de pago referenciado para su verificación</li>
+            <li>Realizar el pago correspondiente en la institución bancaria indicada</li>
+            <li>Regresar al verificentro con el comprobante de pago</li>
+            <li>Seguir las instrucciones que le indique nuestro personal calificado</li>
+          </ol>
+        </div>
+        
+        <div class="recordatorio">
+          <p><strong>Recordatorio:</strong> Este servicio está disponible para todos los vehículos foráneos de cualquier estado de la república.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="horarios">
+    <h2 class="section-title">Horarios de Atención</h2>
+    <div class="product-card">
+      <h3 class="product-title">Horario Regular</h3>
+      <ul>
+        <li><strong>Lunes a Viernes:</strong> 9:00 am - 5:00 pm</li>
+        <li><strong>Sábados:</strong> 9:00 am - 2:00 pm</li>
+        <li><strong>Domingos:</strong> Cerrado</li>
+      </ul>
+      <div class="info-adicional">
+        <p><strong>Nota:</strong> Los horarios pueden cambiar dependiendo de días festivos o por cualquier cosa. Consulte horarios y días laborales con anticipación antes de acudir.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="ubicacion">
+    <h2 class="section-title">Ubicación y contacto</h2>
+    <div class="product-card">
+      <h3 class="product-title">Visítanos</h3>
+      <p><strong>Dirección:</strong> Escuadrón 201, El Cafetal, 92330 Naranjos, Ver.</p>
+      <p><strong>Teléfono:</strong> 768 855 4488</p>
+
+      <img src="Fachada verificentro.jpg" alt="Fachada del Verificentro V-NAR-01" class="fachada-img">
+
+      <div class="dual-map-container" style="display: flex; flex-direction: row; gap: 1rem; width: 100%; margin-top: 1.5rem;">
+        <div style="flex: 1; height: 300px; border-radius: 8px; overflow: hidden; box-shadow: 0 2px 4px rgba(0,0,0,0.1);">
+          <iframe 
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3742.222784060918!2d-97.6800009246876!3d20.29666151294438!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x85d31d8a9736e3a5%3A0x7e4a1c803d6a4e3b!2sEscuadr%C3%B3n%20201%2C%20El%20Cafetal%2C%2092330%20Naranjos%2C%20Ver.!5e0!3m2!1ses!2smx!4v1719876543210!5m2!1ses!2smx" 
+            width="100%" 
+            height="100%" 
+            style="border:0;" 
+            allowfullscreen="" 
+            loading="lazy" 
+            referrerpolicy="no-referrer-when-downgrade">
+          </iframe>
+        </div>
+        
+        <div style="flex: 1; height: 300px; border-radius: 8px; overflow: hidden; box-shadow: 0 2px 4px rgba(0,0,0,0.1);">
+          <iframe
+            src="https://www.google.com/maps/embed?pb=!4v1752466857852!6m8!1m7!1sHe6xBLv19QpuQsC3wgT_DA!2m2!1d21.35590788539066!2d-97.6932189179032!3f304.0130285026578!4f-11.55948634185792!5f0.7820865974627469"
+            width="100%"
+            height="100%"
+            style="border:0;"
+            allowfullscreen=""
+            loading="lazy"
+            referrerpolicy="no-referrer-when-downgrade">
+          </iframe>
+        </div>
+      </div>
+      
+      <div class="map-button-container">
+        <a href="https://maps.app.goo.gl/iY4bWx7Xtd6kAhSj6" class="map-button" target="_blank">Ver en Google Maps</a>
+      </div>
+    </div>
+  </section>
+
+<footer>
+      <p style="margin: 0; font-size: 0.95rem; font-weight: 500;">
+        © 2025 Verificentro V-NAR-01 - Todos los derechos reservados
+      </p>
+    </div>
+     <div style="display: flex; justify-content: center; align-items: center; margin-bottom: 8px;">
+      <img src="logo-veracruz-fin.png" alt="Escudo Veracruz" style="height: 25px; margin-right: 10px;">
+    </div>
+    <div style="display: flex; justify-content: center; align-items: center; margin: 10px 0; gap: 15px;">
+      <div style="display: flex; align-items: center;">
+        <img src="logo-sefiplan.png" alt="SEFIPLAN" style="height: 25px; margin-right: 10px;">
+        <span style="font-size: 0.85rem;"></span>
+      </div>
+      <div style="display: flex; align-items: center;">
+        <img src="logo-sedema.png" alt="SEDEMA" style="height: 25px; margin-right: 10px;">
+        <span style="font-size: 0.85rem;"></span>
+      </div>
+    </div>
+    
+    <p style="margin: 0 0 8px 0; font-size: 0.85rem; font-style: italic;">
+      Sitio oficial de verificentro V-NAR-01. Verificentro autorizado por el Gobierno del Estado de Veracruz
+    </p>
+</footer>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      const sections = document.querySelectorAll('section');
+      sections.forEach(section => {
+        if (section.id !== 'inicio') {
+          section.style.display = 'none';
+        }
+      });
+
+      function showSection(sectionId) {
+        sections.forEach(section => {
+          section.style.display = 'none';
+        });
+        
+        const targetSection = document.getElementById(sectionId);
+        if (targetSection) {
+          targetSection.style.display = 'block';
+          
+          window.scrollTo({
+            top: targetSection.offsetTop - 150,
+            behavior: 'smooth'
+          });
+        }
+      }
+
+      document.querySelectorAll('nav a').forEach(anchor => {
+        anchor.addEventListener('click', function(e) {
+          e.preventDefault();
+          
+          const targetId = this.getAttribute('href').substring(1);
+          
+          showSection(targetId);
+          
+          document.querySelectorAll('nav a').forEach(link => {
+            link.classList.remove('active');
+          });
+          this.classList.add('active');
+        });
+      });
+
+      window.consultarFecha = function() {
+        const placa = document.getElementById("placa").value.toUpperCase();
+        const ultimoDigito = placa.match(/\d(?=\D*$)/);
+        let resultado = document.getElementById("resultado");
+
+        if (!ultimoDigito) {
+          resultado.innerHTML = "<span style='color: red;'>Número de placa inválido. Por favor ingrese una placa válida (ejemplo: ABC1234).</span>";
+          return;
+        }
+
+        const calendario = {
+          '5': [0, 1, 6, 7],
+          '6': [0, 1, 6, 7],
+          '7': [1, 2, 7, 8],
+          '8': [1, 2, 7, 8],
+          '3': [2, 3, 8, 9],
+          '4': [2, 3, 8, 9],
+          '1': [3, 4, 9, 10],
+          '2': [3, 4, 9, 10],
+          '9': [4, 5, 10, 11],
+          '0': [4, 5, 10, 11]
+        };
+
+        const now = new Date();
+        const mes = now.getMonth();
+        const dig = ultimoDigito[0];
+        const [m1, m2, m3, m4] = calendario[dig];
+
+        const periodosNombres = [
+          'Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio',
+          'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'
+        ];
+
+         let mensaje = `<div style="background-color: #77052b; padding: 1rem; border-radius: 8px; margin-bottom: 1rem;">
+           <p style="color: #ffffff;">Para el vehículo con terminación de placa <strong>${dig}</strong>:</p>
+         </div>`;
+
+        if (dig === '5' || dig === '6') {
+          // Comportamiento especial para placas que terminan en 5 y 6
+          if (mes === m3 || mes === m4) {
+            mensaje += `<div style="background-color: #77052b; padding: 1rem; border-radius: 8px; margin-bottom: 1rem;">
+              <p style="color: #ffffff; font-weight: bold;">📅 Su verificación actual debe realizarse entre <strong>${periodosNombres[m3]}</strong> y <strong>${periodosNombres[m4]}</strong> (segundo periodo).</p>
+            </div>`;
+          } else if (mes < m3) {
+            mensaje += `<p style="color: #000000; font-weight: bold;">⏳ Su periodo de verificación iniciará entre <strong>${periodosNombres[m3]}</strong> y <strong>${periodosNombres[m4]}</strong> (segundo periodo).</p>`;
+          } else if (mes > m4) {
+            mensaje += `<p style="color: #000000; font-weight: bold;">🚨 El periodo de verificación ha concluido (${periodosNombres[m3]}-${periodosNombres[m4]}).</p>`;
+            mensaje += `<p style="color: #000000; font-weight: bold;">Es necesario que acuda a regularizar su situación lo antes posible para evitar sanciones.</p>`;
+          }
+        } else {
+          // Comportamiento para las demás placas
+          if (mes === m1 || mes === m2) {
+            mensaje += `<p style="color: #000000; font-weight: bold;">📅 Su verificación actual debe realizarse entre <strong>${periodosNombres[m1]}</strong> y <strong>${periodosNombres[m2]}</strong> (primer periodo).</p>`;
+          } else if (mes >= m3 && mes <= m4) {
+            mensaje += `<p style="color: #000000; font-weight: bold;">📅 Su verificación actual debe realizarse entre <strong>${periodosNombres[m3]}</strong> y <strong>${periodosNombres[m4]}</strong> (segundo periodo).</p>`;
+          } else if (mes < m1) {
+            mensaje += `<p style="color: #000000; font-weight: bold;">⏳ Su primer periodo de verificación será entre <strong>${periodosNombres[m1]}</strong> y <strong>${periodosNombres[m2]}</strong>.</p>`;
+          } else if (mes > m4) {
+            mensaje += `<p style="color: #000000; font-weight: bold;">🚨 Ambos periodos de verificación han concluido (${periodosNombres[m1]}-${periodosNombres[m2]} y ${periodosNombres[m3]}-${periodosNombres[m4]}).</p>`;
+            mensaje += `<p style="color: #000000; font-weight: bold;">Es necesario que acuda a regularizar su situación lo antes posible para evitar sanciones.</p>`;
+          } else {
+            mensaje += `<div style="background-color: #77052b; padding: 1rem; border-radius: 8px; margin-bottom: 1rem;">
+              <p style="color: #ffffff; font-weight: bold;">⏳ Su próximo periodo de verificación será entre <strong>${periodosNombres[m3]}</strong> y <strong>${periodosNombres[m4]}</strong> (segundo periodo).</p>
+            </div>`;
+            
+            mensaje += `<div style="margin-top: 1rem; padding: 1rem; background-color: #77052b; border-left: 4px solid #77052b; border-radius: 4px;">
+              <p style="color: #ffffff; font-weight: bold;">Recordatorio importante:</p>
+              <p style="color: #ffffff;">Su primer periodo de verificación fue entre <strong>${periodosNombres[m1]}</strong> y <strong>${periodosNombres[m2]}</strong>.</p>
+              <p style="margin-top: 0.5rem; color: #ffffff;">📌 <strong>Recuerda:</strong> Si no realizaste tu verificación en el primer periodo, es importante que lo hagas ahora para mantener tu vehículo en regla y evitar sanciones.</p>
+            </div>`;
+          }
+        }
+
+        mensaje += `<div style="margin-top: 1.5rem; padding: 1rem; background-color: #77052b; border-radius: 8px; border-left: 4px solid #77052b;">
+          <p style="color: #ffffff; font-weight: bold;">Información general:</p>
+          <p style="color: #ffffff;">• La verificación vehicular es obligatoria para todos los vehículos en circulación.</p>
+          <p style="color: #ffffff;">• El costo de la verificación lo determina el sistema de la Oficina Virtual de Hacienda (OVH) del Estado de Veracruz y se especifica en el recibo de pago referenciado que se genera al momento del trámite.</p>
+          <p style="color: #ffffff;">• Horario de atención: Lunes a Viernes de 9:00 am a 5:00 pm, Sábados de 9:00 am a 2:00 pm.</p>
+        </div>`;
+
+        resultado.innerHTML = mensaje;
+      }
+    });
+  </script>
+</body>
+</html>
