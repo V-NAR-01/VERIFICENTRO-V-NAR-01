@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Verificentro V-NAR-01</title>
   <link rel="icon" href="Logo-Verificación.ico" type="image/x-icon">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <style>
     body {
       margin: 0;
@@ -429,6 +430,300 @@
       overflow: hidden;
       box-shadow: 0 2px 4px rgba(0,0,0,0.1);
     }
+    .fachada-img {
+      width: 80%;
+      max-width: 600px;
+      height: auto;
+      display: block;
+      margin: 1rem auto;
+      border-radius: 8px;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+      border: 2px solid #77052b;
+    }
+    
+    /* Estilos para la sección de novedades */
+    .novedad-card {
+      background-color: #77052b;
+      border-radius: 8px;
+      padding: 1.5rem;
+      margin-bottom: 1.5rem;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    }
+    .novedad-title {
+      color: #ffffff;
+      font-size: 1.3rem;
+      margin-bottom: 0.8rem;
+      border-bottom: 2px solid #ffffff;
+      padding-bottom: 0.5rem;
+    }
+    .novedad-date {
+      color: #f8d7da;
+      font-size: 0.9rem;
+      margin-bottom: 1rem;
+      display: block;
+    }
+    .novedad-img {
+      max-width: 100%;
+      height: auto;
+      border-radius: 8px;
+      border: 2px solid #fff;
+      margin: 15px 0;
+      display: block;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    
+    /* Estilos para la sección de información */
+    .info-card {
+      background-color: #77052b;
+      border-radius: 8px;
+      padding: 1.5rem;
+      margin-bottom: 1.5rem;
+      box-shadow: 0 4px 8px rgba(255, 255, 255, 0.1);
+      color: #ffffff;
+    }
+    .info-title {
+      color: #ffffff;
+      font-size: 1.3rem;
+      margin-bottom: 1rem;
+      border-bottom: 2px solid #ffffff;
+      padding-bottom: 0.5rem;
+    }
+    .info-list {
+      padding-left: 1.5rem;
+    }
+    .info-list li {
+      margin-bottom: 0.8rem;
+    }
+    
+    /* Botón flotante de WhatsApp */
+    .whatsapp-button {
+      position: fixed;
+      bottom: 30px;
+      right: 30px;
+      background-color: #25D366;
+      color: white;
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      text-align: center;
+      font-size: 30px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+      z-index: 999;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.3s ease;
+    }
+    .whatsapp-button:hover {
+      background-color: #128C7E;
+      transform: scale(1.1);
+    }
+    .whatsapp-text {
+      display: none;
+      position: absolute;
+      right: 70px;
+      background-color: #25D366;
+      color: white;
+      padding: 10px 15px;
+      border-radius: 30px;
+      font-size: 14px;
+      white-space: nowrap;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+    }
+    .whatsapp-button:hover .whatsapp-text {
+      display: block;
+    }
+    
+    /* ESTILOS DEL ASISTENTE VIRTUAL MEJORADO */
+    .chatbot-button {
+      position: fixed;
+      bottom: 100px;
+      left: 30px;
+      background-color: #77052b;
+      color: white;
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      text-align: center;
+      font-size: 30px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+      z-index: 999;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+    
+    .chatbot-button:hover {
+      background-color: #8f0e39;
+      transform: scale(1.1);
+    }
+    
+    .chatbot-container {
+      position: fixed;
+      bottom: 170px;
+      left: 30px;
+      width: 350px;
+      max-width: 90%;
+      background-color: white;
+      border-radius: 10px;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+      z-index: 1000;
+      display: none;
+      flex-direction: column;
+      overflow: hidden;
+      font-family: 'Segoe UI', sans-serif;
+    }
+    
+    .chatbot-header {
+      background-color: #77052b;
+      color: white;
+      padding: 15px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    
+    .chatbot-header h3 {
+      margin: 0;
+      font-size: 1.2rem;
+    }
+    
+    .close-chatbot {
+      background: none;
+      border: none;
+      color: white;
+      font-size: 1.5rem;
+      cursor: pointer;
+      padding: 0 5px;
+    }
+    
+    .chatbot-messages {
+      height: 300px;
+      overflow-y: auto;
+      padding: 15px;
+      background-color: #f9f9f9;
+    }
+    
+    .chatbot-input {
+      display: flex;
+      padding: 10px;
+      border-top: 1px solid #eee;
+      background-color: white;
+    }
+    
+    .chatbot-input input {
+      flex: 1;
+      padding: 10px;
+      border: 1px solid #ddd;
+      border-radius: 20px;
+      outline: none;
+    }
+    
+    .chatbot-input button {
+      background-color: #77052b;
+      color: white;
+      border: none;
+      border-radius: 50%;
+      width: 40px;
+      height: 40px;
+      margin-left: 10px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    
+    .message {
+      margin-bottom: 15px;
+      max-width: 80%;
+      padding: 10px 15px;
+      border-radius: 18px;
+      line-height: 1.4;
+      position: relative;
+      font-size: 14px;
+    }
+    
+    .bot-message {
+      background-color: #e9e9e9;
+      color: #333;
+      border-top-left-radius: 5px;
+      align-self: flex-start;
+      margin-right: auto;
+    }
+    
+    .user-message {
+      background-color: #77052b;
+      color: white;
+      border-top-right-radius: 5px;
+      align-self: flex-end;
+      margin-left: auto;
+    }
+    
+    .options-message {
+      background-color: #f1f1f1;
+      padding: 10px;
+      border-radius: 10px;
+      margin-top: 10px;
+    }
+    
+    .option-item {
+      margin: 5px 0;
+      padding: 8px 10px;
+      background-color: #77052b;
+      color: white;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: background-color 0.2s;
+    }
+    
+    .option-item:hover {
+      background-color: #8f0e39;
+    }
+    
+    .payment-methods {
+      margin-top: 10px;
+    }
+    
+    .payment-methods li {
+      margin-bottom: 8px;
+      display: flex;
+      align-items: center;
+    }
+    
+    .payment-methods li:before {
+      content: "•";
+      color: #77052b;
+      font-weight: bold;
+      display: inline-block;
+      width: 1em;
+      margin-left: -1em;
+    }
+    
+    .news-item {
+      margin-bottom: 20px;
+      padding: 15px;
+      background-color: #fff;
+      border-radius: 10px;
+      border-left: 4px solid #77052b;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+    }
+    
+    .news-title {
+      font-weight: bold;
+      margin-bottom: 8px;
+      color: #77052b;
+      font-size: 16px;
+    }
+    
+    .news-date {
+      font-size: 12px;
+      color: #777;
+      margin-bottom: 10px;
+      display: block;
+    }
     
     @media (min-width: 768px) {
       body {
@@ -480,6 +775,9 @@
       .robot-container {
         height: 400px;
       }
+      .fachada-img {
+        width: 70%;
+      }
     }
     
     @media (min-width: 992px) {
@@ -492,24 +790,35 @@
       .robot-container {
         height: 500px;
       }
+      .whatsapp-button {
+        width: 70px;
+        height: 70px;
+        font-size: 35px;
+      }
     }
-    .fachada-img {
-  width: 80%; /* Reducimos el ancho al 80% del contenedor */
-  max-width: 600px; /* Ancho máximo */
-  height: auto; /* Mantiene la proporción */
-  display: block; /* Para centrar con margen automático */
-  margin: 1rem auto; /* Centrado vertical y horizontal */
-  border-radius: 8px;
-  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-  border: 2px solid #77052b;
-}
-
-@media (max-width: 768px) {
-  .fachada-img {
-    width: 95%; /* En móvil ocupa casi todo el ancho */
-    max-width: 100%; /* Permite que se ajuste al contenedor */
-  }
-}
+    
+    @media (max-width: 768px) {
+      .fachada-img {
+        width: 95%;
+        max-width: 100%;
+      }
+      .whatsapp-text {
+        display: none !important;
+      }
+      .chatbot-button {
+        bottom: 90px;
+        left: 20px;
+        width: 50px;
+        height: 50px;
+        font-size: 25px;
+      }
+      
+      .chatbot-container {
+        bottom: 150px;
+        left: 20px;
+        width: 300px;
+      }
+    }
   </style>
 </head>
 <body>
@@ -522,11 +831,39 @@
       <a href="#inicio" class="active">Inicio</a>
       <a href="#servicios">Servicios</a>
       <a href="#requisitos">Requisitos</a>
+      <a href="#novedades">Novedades</a>
+      <a href="#informacion">Información</a>
       <a href="#horarios">Horarios</a>
-      <a href="#ubicacion">Ubicación y contacto</a>
-      <a href="#verificacion" class="consulta-btn">📅 Consulta tu Fecha de Verificación</a>
+      <a href="#ubicacion">Ubicación</a>
+      <a href="#verificacion" class="consulta-btn">📅 Consulta tu Fecha</a>
     </nav>
   </header>
+
+  <!-- Botón flotante de WhatsApp -->
+  <a href="https://wa.me/527688554488" class="whatsapp-button" target="_blank">
+    <i class="fab fa-whatsapp"></i>
+    <span class="whatsapp-text">Chatea con nosotros</span>
+  </a>
+
+  <!-- Botón flotante del chatbot -->
+  <div class="chatbot-button" onclick="toggleChatbot()">
+    <i class="fas fa-robot"></i>
+  </div>
+
+  <!-- Contenedor del chatbot -->
+  <div class="chatbot-container" id="chatbotContainer">
+    <div class="chatbot-header">
+      <h3>Asistente Virtual</h3>
+      <button class="close-chatbot" onclick="toggleChatbot()">×</button>
+    </div>
+    <div class="chatbot-messages" id="chatbotMessages">
+      <!-- Los mensajes aparecerán aquí -->
+    </div>
+    <div class="chatbot-input">
+      <input type="text" id="chatbotUserInput" placeholder="Escribe tu pregunta o selecciona una opción..." onkeypress="handleChatbotInput(event)">
+      <button onclick="sendChatbotMessage()"><i class="fas fa-paper-plane"></i></button>
+    </div>
+  </div>
 
   <section id="inicio" class="bg-image-section">
     <div class="bg-image-content">
@@ -733,6 +1070,130 @@
     </div>
   </section>
 
+  <!-- Sección de Novedades Actualizada -->
+  <section id="novedades">
+    <h2 class="section-title">Novedades</h2>
+    
+    <!-- Recordatorio para terminación 7 y 8 -->
+    <div class="novedad-card">
+      <h3 class="novedad-title">Recordatorio para Terminación de Placas 7 y 8</h3>
+      <span class="novedad-date">Publicado: 1 de Agosto, 2025</span>
+      <p>Propietarios de vehículos con terminación de placas 7 y 8:</p>
+      <img src="Anuncio terminacion 7 y 8.png" alt="Recordatorio para terminación 7 y 8" class="novedad-img">
+      <p>Tienen los meses de agosto y septiembre para realizar su verificación vehicular en tiempo y forma.</p>
+      <ul style="margin-left: 20px;">
+        <li>Agosto y septiembre: segundo periodo 2025 para vehiculos con placa en terminacion 7 y 8.</li>
+      </ul>
+      <div style="background-color: rgba(255,255,0,0.1); padding: 10px; border-left: 4px solid yellow; margin-top: 10px;">
+        <p style="margin: 0; font-weight: bold;">Recomendamos ampliamente realizar este trámite con anticipación para evitar aglomeraciones de última hora.</p>
+      </div>
+    </div>
+    
+    <!-- Recordatorio para terminación 5 y 6 -->
+    <div class="novedad-card">
+      <h3 class="novedad-title">Recordatorio para Terminación de Placas 5 y 6</h3>
+      <span class="novedad-date">Publicado: 31 de Julio, 2025</span>
+      <p>¡Atención a los propietarios de vehículos con terminación de placas 5 y 6!</p>
+      <img src="Recordatorio terminacion 5 y 6.png" alt="Recordatorio para terminación 5 y 6" class="novedad-img">
+      <p>Este es el último mes para realizar su verificación en tiempo y forma.</p>
+      
+      <div style="background-color: rgba(255,0,0,0.1); padding: 15px; border-left: 4px solid red; border-radius: 4px; margin-top: 15px;">
+        <p style="margin: 0; font-weight: bold; color: #ffffff; font-size: 1.1rem;">IMPORTANTE:</p>
+        <p style="margin: 10px 0 0 0; color: #ffffff;">Después de la fecha límite (31 de agosto) aún podrá realizar su verificación, pero se considerará como extemporánea, lo que puede acarrear:</p>
+        <ul style="margin: 10px 0 0 20px; color: #ffffff;">
+          <li>Multas por circular sin verificación vigente</li>
+          <li>Restricciones a la circulación (Hoy No Circula)</li>
+          <li>Problemas en trámites vehiculares futuros</li>
+        </ul>
+        <p style="margin: 15px 0 0 0; font-weight: bold; color: #ffffff;">EVITE SANCIONES:</p>
+        <p style="margin: 5px 0 0 0; color: #ffffff;">Realice su verificación antes del 31 de agosto para garantizar su comprobante vigente y evitar contratiempos.</p>
+      </div>
+    </div>
+
+    <!-- Actualización en medios de pago -->
+    <div class="novedad-card">
+      <h3 class="novedad-title">Actualización en Medios de Pago</h3>
+      <span class="novedad-date">Publicado: 04 de Agosto, 2025</span>
+      <p>Informamos a nuestros clientes que hemos implementado nuevas formas de pago para mayor comodidad:</p>
+      
+      <div class="payment-methods">
+        <p><strong>💳 Medios de Pago Aceptados:</strong></p>
+        <ul>
+          <li>Transferencia bancaria</li>
+          <li>Pago en sucursales bancarias autorizadas</li>
+          <li>Pago con tarjeta (débito/crédito) mediante terminal punto de venta</li>
+        </ul>
+        <p><small>(Aceptamos todas las tarjetas bancarias)</small></p>
+      </div>
+      
+      <p style="margin-top: 15px;">La finalidad de implementar el pago con tarjeta en el verificentro es:</p>
+      <ul style="margin-left: 20px;">
+        <li>Agilizar el proceso de pago</li>
+        <li>Reducir tiempos de espera</li>
+        <li>Ofrecer mayor capacidad de atención</li>
+        <li>Brindar más opciones de pago a nuestros clientes</li>
+      </ul>
+      
+      <div style="margin-top: 15px; background-color: rgba(119,5,43,0.1); padding: 10px; border-left: 4px solid #77052b; border-radius: 4px;">
+        <p style="margin: 0; color: #77052b; font-weight: bold;">Nota: Todos los pagos son procesados de forma segura a través del sistema de la Oficina Virtual de Hacienda (OVH) del Estado de Veracruz.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="informacion">
+    <h2 class="section-title">Información Importante</h2>
+    
+    <div class="info-card">
+      <h3 class="info-title">¿Por qué la verificación vehicular es obligatoria?</h3>
+      <p>La verificación vehicular es obligatoria y permanente en el Estado de Veracruz y deberá efectuarse de conformidad con lo previsto en las leyes estatales aplicables a la materia y en las siguientes Normas Oficiales Mexicanas Vigentes:</p>
+      <ul class="info-list">
+        <li>NOM-041-SEMARNAT-2015.</li>
+        <li>NOM-045-SEMARNAT-2017.</li>
+        <li>NOM-047-SEMARNAT-2014.</li>
+        <li>NOM-050-SEMARNAT-2018.</li>
+      </ul>
+      <h3 class="info-title">¿Por qué es importante la verificación vehicular?</h3>
+      <ul class="info-list">
+        <li>Reducir la emisión de contaminantes a la atmósfera</li>
+        <li>Garantizar que los vehículos circulen en óptimas condiciones mecánicas</li>
+        <li>Contribuir a mejorar la calidad del aire que respiramos</li>
+      </ul>
+    </div>
+    
+    <div class="info-card">
+      <h3 class="info-title">Consecuencias de no verificar tu vehículo</h3>
+      <p>No realizar la verificación vehicular en los periodos establecidos puede acarrear:</p>
+      <ul class="info-list">
+        <li>Multas económicas considerables</li>
+        <li>Problemas para realizar trámites vehiculares</li>
+        <li>Restricción a la circulación en ciertas zonas o días</li>
+        <li>Mayor contaminación ambiental</li>
+      </ul>
+    </div>
+    
+    <div class="info-card">
+      <h3 class="info-title">Beneficios de verificar en V-NAR-01</h3>
+      <p>Al elegir nuestro verificentro, usted obtiene:</p>
+      <ul class="info-list">
+        <li>Personal altamente capacitado y certificado</li>
+        <li>Equipos de medición de última generación</li>
+        <li>Procesos rápidos y eficientes</li>
+        <li>Atención personalizada y trato amable</li>
+        <li>Instalaciones limpias y seguras</li>
+        <li>Resultados confiables y transparentes</li>
+      </ul>
+    </div>
+    
+    <div class="info-card">
+      <h3 class="info-title">Preguntas Frecuentes</h3>
+      <p><strong>¿Qué debo hacer si perdí mi papeleta de verificación anterior?</strong></p>
+      <p>Puede realizar su trámite normalmente, solo debe informar esta situación al personal al momento de presentar sus documentos.</p>
+      
+      <p><strong>¿Puedo verificar mi vehículo fuera del periodo asignado?</strong></p>
+      <p>Sí, pero solo dentro de los periodos establecidos en el calendario oficial. Fuera de estos periodos no es posible realizar el trámite.</p>
+    </div>
+  </section>
+
   <section id="horarios">
     <h2 class="section-title">Horarios de Atención</h2>
     <div class="product-card">
@@ -754,13 +1215,14 @@
       <h3 class="product-title">Visítanos</h3>
       <p><strong>Dirección:</strong> Escuadrón 201, El Cafetal, 92330 Naranjos, Ver.</p>
       <p><strong>Teléfono:</strong> 768 855 4488</p>
+      <p><strong>WhatsApp:</strong> <a href="https://wa.me/527688554488" style="color: #25D366; text-decoration: none; font-weight: bold;">768 855 4488</a></p>
 
       <img src="Fachada verificentro.jpg" alt="Fachada del Verificentro V-NAR-01" class="fachada-img">
 
       <div class="dual-map-container" style="display: flex; flex-direction: row; gap: 1rem; width: 100%; margin-top: 1.5rem;">
         <div style="flex: 1; height: 300px; border-radius: 8px; overflow: hidden; box-shadow: 0 2px 4px rgba(0,0,0,0.1);">
           <iframe 
-            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3742.222784060918!2d-97.6800009246876!3d20.29666151294438!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x85d31d8a9736e3a5%3A0x7e4a1c803d6a4e3b!2sEscuadr%C3%B3n%20201%2C%20El%20Cafetal%2C%2092330%20Naranjos%2C%20Ver.!5e0!3m2!1ses!2smx!4v1719876543210!5m2!1ses!2smx" 
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3715.861587932425!2d-97.69323700000001!3d21.355954099999998!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x85d9dd489482efb1%3A0x638c68700aff81d4!2sV-NAR-01!5e0!3m2!1ses-419!2smx!4v1754289352453!5m2!1ses-419!2smx"
             width="100%" 
             height="100%" 
             style="border:0;" 
@@ -789,12 +1251,11 @@
     </div>
   </section>
 
-<footer>
-      <p style="margin: 0; font-size: 0.95rem; font-weight: 500;">
-        © 2025 Verificentro V-NAR-01 - Todos los derechos reservados
-      </p>
-    </div>
-     <div style="display: flex; justify-content: center; align-items: center; margin-bottom: 8px;">
+  <footer>
+    <p style="margin: 0; font-size: 0.95rem; font-weight: 500;">
+      © 2025 Verificentro V-NAR-01 - Todos los derechos reservados
+    </p>
+    <div style="display: flex; justify-content: center; align-items: center; margin-bottom: 8px;">
       <img src="logo-veracruz-fin.png" alt="Escudo Veracruz" style="height: 25px; margin-right: 10px;">
     </div>
     <div style="display: flex; justify-content: center; align-items: center; margin: 10px 0; gap: 15px;">
@@ -811,7 +1272,7 @@
     <p style="margin: 0 0 8px 0; font-size: 0.85rem; font-style: italic;">
       Sitio oficial de verificentro V-NAR-01. Verificentro autorizado por el Gobierno del Estado de Veracruz
     </p>
-</footer>
+  </footer>
 
   <script>
     document.addEventListener('DOMContentLoaded', function() {
@@ -934,6 +1395,338 @@
         </div>`;
 
         resultado.innerHTML = mensaje;
+      }
+
+      // Variables para el estado del chatbot
+      let chatbotVisible = false;
+      let currentStep = 'mainMenu';
+      
+      // Función para mostrar/ocultar el chatbot
+      window.toggleChatbot = function() {
+        const chatbot = document.getElementById('chatbotContainer');
+        chatbotVisible = !chatbotVisible;
+        chatbot.style.display = chatbotVisible ? 'flex' : 'none';
+        
+        if (chatbotVisible) {
+          // Mostrar mensaje de bienvenida solo si es la primera vez
+          const messages = document.getElementById('chatbotMessages');
+          if (messages.children.length === 0) {
+            showWelcomeMessage();
+          }
+        }
+      }
+      
+      // Mensaje de bienvenida
+      function showWelcomeMessage() {
+        addBotMessage('¡Hola! Soy el asistente virtual del Verificentro V-NAR-01. ¿En qué puedo ayudarte hoy?');
+        
+        // Mostrar opciones principales
+        showMainOptions();
+      }
+      
+      // Mostrar opciones principales
+      function showMainOptions() {
+        currentStep = 'mainMenu';
+        
+        const options = [
+          {number: 1, text: "Requisitos para verificación"},
+          {number: 2, text: "Horarios de atención"},
+          {number: 3, text: "Ubicación del verificentro"},
+          {number: 4, text: "Precios y costos"},
+          {number: 5, text: "Documentación necesaria"},
+          {number: 6, text: "Periodos de verificación"},
+          {number: 7, text: "Multas y sanciones"},
+          {number: 8, text: "Contacto y soporte"}
+        ];
+        
+        let optionsHtml = '<div class="options-message">';
+        optionsHtml += '<p>Por favor selecciona una opción:</p>';
+        options.forEach(option => {
+          optionsHtml += `<div class="option-item" onclick="selectOption(${option.number})">${option.number}. ${option.text}</div>`;
+        });
+        optionsHtml += '</div>';
+        
+        addBotMessage(optionsHtml);
+      }
+      
+      // Manejar selección de opción
+      window.selectOption = function(optionNumber) {
+        addUserMessage(optionNumber.toString());
+        
+        switch(optionNumber) {
+          case 1:
+            showRequisitosInfo();
+            break;
+          case 2:
+            showHorariosInfo();
+            break;
+          case 3:
+            showUbicacionInfo();
+            break;
+          case 4:
+            showPreciosInfo();
+            break;
+          case 5:
+            showDocumentacionInfo();
+            break;
+          case 6:
+            showPeriodosInfo();
+            break;
+          case 7:
+            showMultasInfo();
+            break;
+          case 8:
+            showContactoInfo();
+            break;
+          default:
+            addBotMessage("Opción no reconocida. Por favor selecciona una opción válida.");
+            showMainOptions();
+        }
+      }
+      
+      // Información sobre requisitos
+      function showRequisitosInfo() {
+        currentStep = 'requisitos';
+        
+        addBotMessage("Los requisitos varían según el tipo de vehículo:");
+        
+        let optionsHtml = '<div class="options-message">';
+        optionsHtml += '<p>Selecciona el tipo de vehículo:</p>';
+        optionsHtml += '<div class="option-item" onclick="showRequisitosDetail(1)">1. Vehículos particulares</div>';
+        optionsHtml += '<div class="option-item" onclick="showRequisitosDetail(2)">2. Transporte público</div>';
+        optionsHtml += '<div class="option-item" onclick="showRequisitosDetail(3)">3. Vehículos pesados</div>';
+        optionsHtml += '<div class="option-item" onclick="showRequisitosDetail(4)">4. Vehículos foráneos</div>';
+        optionsHtml += '<div class="option-item" onclick="showMainOptions()">0. Volver al menú principal</div>';
+        optionsHtml += '</div>';
+        
+        addBotMessage(optionsHtml);
+      }
+      
+      window.showRequisitosDetail = function(type) {
+        let message = "";
+        
+        switch(type) {
+          case 1:
+            message = "📋 <strong>Requisitos para vehículos particulares:</strong><br><br>";
+            message += "• Tarjeta de circulación original vigente<br>";
+            message += "• Papeleta de verificación anterior (comprobante de la última verificación)<br><br>";
+            message += "Si no cuenta con la papeleta anterior, puede manifestarlo al personal al momento del trámite.";
+            break;
+          case 2:
+            message = "🚌 <strong>Requisitos para transporte público:</strong><br><br>";
+            message += "• Tarjeta de circulación original vigente<br>";
+            message += "• Papeleta de verificación anterior<br><br>";
+            message += "Para vehículos en proceso de emplacamiento, favor de acudir al verificentro para información específica.";
+            break;
+          case 3:
+            message = "🚛 <strong>Requisitos para vehículos pesados:</strong><br><br>";
+            message += "• Tarjeta de circulación original vigente<br>";
+            message += "• Papeleta de verificación anterior<br><br>";
+            message += "Los vehículos diésel tienen requisitos adicionales de emisiones.";
+            break;
+          case 4:
+            message = "🚗 <strong>Requisitos para vehículos foráneos:</strong><br><br>";
+            message += "• Tarjeta de circulación original vigente<br>";
+            message += "• Papeleta de verificación anterior (si cuenta con ella)<br><br>";
+            message += "Este servicio es voluntario para vehículos con placas de otros estados.";
+            break;
+        }
+        
+        addBotMessage(message);
+        
+        // Preguntar si necesita más ayuda
+        setTimeout(() => {
+          addBotMessage("¿Necesitas información sobre otro tipo de vehículo?", [
+            {text: "Sí, ver otro tipo", action: "showRequisitosInfo()"},
+            {text: "No, volver al menú", action: "showMainOptions()"}
+          ]);
+        }, 500);
+      }
+      
+      // Información sobre horarios
+      function showHorariosInfo() {
+        addBotMessage("🕒 <strong>Horarios de atención:</strong><br><br>" +
+                      "• Lunes a Viernes: 9:00 am - 5:00 pm<br>" +
+                      "• Sábados: 9:00 am - 2:00 pm<br>" +
+                      "• Domingos: Cerrado<br><br>" +
+                      "<em>Nota: Los horarios pueden cambiar en días festivos. Consulte con anticipación.</em>");
+        
+        // Preguntar si necesita más ayuda
+        setTimeout(() => {
+          askForMoreHelp();
+        }, 500);
+      }
+      
+      // Información sobre ubicación
+      function showUbicacionInfo() {
+        addBotMessage("📍 <strong>Ubicación del verificentro:</strong><br><br>" +
+                      "Escuadrón 201, El Cafetal, 92330 Naranjos, Ver.<br><br>" +
+                      "Puedes ver nuestra ubicación en Google Maps: " +
+                      "<a href='https://maps.app.goo.gl/iY4bWx7Xtd6kAhSj6' target='_blank'>Ver en mapa</a>");
+        
+        // Preguntar si necesita más ayuda
+        setTimeout(() => {
+          askForMoreHelp();
+        }, 500);
+      }
+      
+      // Información sobre precios
+      function showPreciosInfo() {
+        addBotMessage("💰 <strong>Precios de verificación:</strong><br><br>" +
+                      "• Precio oficial de referencia: $476.00<br><br>" +
+                      "<em>Nota: El precio final lo determina el sistema de la Oficina Virtual de Hacienda (OVH) del Estado de Veracruz " +
+                      "y se especifica en el recibo de pago referenciado que se genera al momento del trámite.</em>");
+        
+        // Preguntar si necesita más ayuda
+        setTimeout(() => {
+          askForMoreHelp();
+        }, 500);
+      }
+      
+      // Información sobre documentación
+      function showDocumentacionInfo() {
+        addBotMessage("📄 <strong>Documentación necesaria:</strong><br><br>" +
+                      "Para todos los vehículos se requiere:<br>" +
+                      "• Tarjeta de circulación original vigente<br>" +
+                      "• Papeleta de verificación anterior (si aplica)<br><br>" +
+                      "No se requiere identificación oficial del propietario.");
+        
+        // Preguntar si necesita más ayuda
+        setTimeout(() => {
+          askForMoreHelp();
+        }, 500);
+      }
+      
+      // Información sobre periodos
+      function showPeriodosInfo() {
+        addBotMessage("📅 <strong>Periodos de verificación:</strong><br><br>" +
+                      "Los periodos de verificación dependen del último dígito de tu placa:<br><br>" +
+                      "• Terminación 5 y 6: Julio-Agosto / Enero-Febrero<br>" +
+                      "• Terminación 7 y 8: Agosto-Septiembre / Febrero-Marzo<br>" +
+                      "• Terminación 3 y 4: Septiembre-Octubre / Marzo-Abril<br>" +
+                      "• Terminación 1 y 2: Octubre-Noviembre / Abril-Mayo<br>" +
+                      "• Terminación 9 y 0: Noviembre-Diciembre / Mayo-Junio<br><br>" +
+                      "Puedes consultar tu fecha exacta en la sección 'Consulta tu Fecha' de nuestro sitio web.");
+        
+        // Preguntar si necesita más ayuda
+        setTimeout(() => {
+          askForMoreHelp();
+        }, 500);
+      }
+      
+      // Información sobre multas
+      function showMultasInfo() {
+        addBotMessage("⚠️ <strong>Multas y sanciones:</strong><br><br>" +
+                      "No realizar la verificación vehicular en los periodos establecidos puede acarrear:<br>" +
+                      "• Multas económicas considerables<br>" +
+                      "• Problemas para realizar trámites vehiculares<br>" +
+                      "• Restricción a la circulación en ciertas zonas o días<br><br>" +
+                      "Si tu verificación está vencida, te recomendamos regularizar tu situación lo antes posible.");
+        
+        // Preguntar si necesita más ayuda
+        setTimeout(() => {
+          askForMoreHelp();
+        }, 500);
+      }
+      
+      // Información sobre contacto
+      function showContactoInfo() {
+        addBotMessage("📞 <strong>Contacto y soporte:</strong><br><br>" +
+                      "Puedes contactarnos por:<br>" +
+                      "• Teléfono: 768 855 4488<br>" +
+                      "• WhatsApp: <a href='https://wa.me/527688554488' target='_blank'>768 855 4488</a><br>" +
+                      "• Visítanos: Escuadrón 201, El Cafetal, Naranjos, Ver.<br><br>" +
+                      "Horario de atención telefónica: Lunes a Viernes de 9:00 am a 5:00 pm.");
+        
+        // Preguntar si necesita más ayuda
+        setTimeout(() => {
+          askForMoreHelp();
+        }, 500);
+      }
+      
+      // Preguntar si el usuario necesita más ayuda
+      function askForMoreHelp() {
+        addBotMessage("¿Necesitas ayuda con algo más?", [
+          {text: "Sí, otra consulta", action: "showMainOptions()"},
+          {text: "No, gracias", action: "addBotMessage('¡Gracias por contactarnos! Si tienes más preguntas, no dudes en volver.')"}
+        ]);
+      }
+      
+      // Manejar entrada de texto del usuario
+      window.handleChatbotInput = function(event) {
+        if (event.key === 'Enter') {
+          sendChatbotMessage();
+        }
+      }
+      
+      window.sendChatbotMessage = function() {
+        const input = document.getElementById('chatbotUserInput');
+        const message = input.value.trim();
+        
+        if (message !== '') {
+          addUserMessage(message);
+          input.value = '';
+          
+          // Procesar mensaje del usuario
+          if (currentStep === 'mainMenu') {
+            const option = parseInt(message);
+            if (!isNaN(option)) {
+              selectOption(option);
+            } else {
+              addBotMessage("Por favor selecciona una opción numérica del menú.");
+              showMainOptions();
+            }
+          } else if (currentStep === 'requisitos') {
+            const option = parseInt(message);
+            if (!isNaN(option)) {
+              if (option >= 1 && option <= 4) {
+                showRequisitosDetail(option);
+              } else if (option === 0) {
+                showMainOptions();
+              } else {
+                addBotMessage("Opción no válida. Por favor selecciona una opción del 1 al 4 o 0 para volver.");
+              }
+            } else {
+              addBotMessage("Por favor ingresa el número de la opción que deseas.");
+            }
+          }
+        }
+      }
+      
+      // Agregar mensaje del bot
+      function addBotMessage(text, buttons = []) {
+        const messages = document.getElementById('chatbotMessages');
+        const messageDiv = document.createElement('div');
+        messageDiv.className = 'message bot-message';
+        messageDiv.innerHTML = text;
+        messages.appendChild(messageDiv);
+        
+        if (buttons.length > 0) {
+          const buttonsDiv = document.createElement('div');
+          buttonsDiv.className = 'options-message';
+          
+          buttons.forEach(button => {
+            const buttonDiv = document.createElement('div');
+            buttonDiv.className = 'option-item';
+            buttonDiv.textContent = button.text;
+            buttonDiv.onclick = new Function(button.action);
+            buttonsDiv.appendChild(buttonDiv);
+          });
+          
+          messages.appendChild(buttonsDiv);
+        }
+        
+        messages.scrollTop = messages.scrollHeight;
+      }
+      
+      // Agregar mensaje del usuario
+      function addUserMessage(text) {
+        const messages = document.getElementById('chatbotMessages');
+        const messageDiv = document.createElement('div');
+        messageDiv.className = 'message user-message';
+        messageDiv.textContent = text;
+        messages.appendChild(messageDiv);
+        messages.scrollTop = messages.scrollHeight;
       }
     });
   </script>
